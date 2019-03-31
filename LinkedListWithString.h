@@ -8,7 +8,8 @@ public:
 	enum StringNodeDefine {
 		MAXLENGTH = 10,
 	};
-	StringNode() {}
+	StringNode();
+	StringNode(char* word, unsigned int cnt);
 	~StringNode() {}
 	char* GetStringP() { return word; }
 	unsigned int GetMaxlength() { return (unsigned int)MAXLENGTH; }
@@ -29,27 +30,26 @@ private:
 	StringNode* next;
 };
 
+
 class LinkedListWIthString {
 public:
 	LinkedListWIthString();
 	~LinkedListWIthString();
-
+	void Insert(char* str, unsigned int _cnt);
+	void Search(char* str);
+	void Delete(char* str);
 private:
 	StringNode* head;
 	StringNode* tail;
-
 };
 
-LinkedListWIthString::LinkedListWIthString() {
-	head = new StringNode();
-	tail = new StringNode();
-	head->SetNextP(tail);
-	head->SetPrevP(tail);
-	tail->SetNextP(head);
-	tail->SetPrevP(head);
-
+void LinkedListWIthString::Insert(char* str, unsigned int _cnt){
+	StringNode* newP = new StringNode(str, _cnt);
+	newP->SetPrevP(head->GetPrevP());
+	newP->SetNextP(head);
+	head->SetPrevP(newP);
+	return;
 }
-LinkedListWIthString::~LinkedListWIthString() {}
 
 
 
