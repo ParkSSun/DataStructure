@@ -14,6 +14,7 @@ public:
 	char* GetStringP() { return word; }
 	unsigned int GetMaxlength() { return (unsigned int)MAXLENGTH; }
 	unsigned int GetCnt() { return cnt; }
+	void SetCnt(unsigned int _cnt) { cnt = _cnt; }
 	unsigned int IncreaseCnt(unsigned int val) { return cnt += val; }
 	unsigned int DecreaseCnt(unsigned int val) { return cnt -= val; }
 	StringNode* GetPrevP() { return prev; }
@@ -22,35 +23,25 @@ public:
 	void SetNextP(StringNode* val) { next = val; }
 	void SetValue(char* _word, unsigned int _cnt);
 private:
-	void StringCpy(char* dst, char* srt, unsigned int len);
-	unsigned int GetStringLen(char* len);
 	char word[MAXLENGTH];
 	unsigned int cnt;
 	StringNode* prev;
 	StringNode* next;
 };
 
-
-class LinkedListWIthString {
+class LinkedListWithString {
 public:
-	LinkedListWIthString();
-	~LinkedListWIthString();
+	LinkedListWithString();
+	~LinkedListWithString();
 	void Insert(char* str, unsigned int _cnt);
-	void Search(char* str);
+	StringNode* Search(char* str);
 	void Delete(char* str);
+	StringNode* GetHead() { return head; }
+	StringNode* GetTail() { return tail; }
+	void PrintAll();
 private:
 	StringNode* head;
 	StringNode* tail;
 };
-
-void LinkedListWIthString::Insert(char* str, unsigned int _cnt){
-	StringNode* newP = new StringNode(str, _cnt);
-	newP->SetPrevP(head->GetPrevP());
-	newP->SetNextP(head);
-	head->SetPrevP(newP);
-	return;
-}
-
-
 
 #endif // __LINKEDLISTWITHSTRING_H__

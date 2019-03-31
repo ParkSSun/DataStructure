@@ -1,8 +1,10 @@
 #include "LinkedList.h"
 #include "hashing.h"
 #include"quickSort.h"
+#include "LinkedListWithString.h"
+#include "QuickSortWIthLinkedList.h"
 int main() {
-	/*
+#if 0
 	LinkedList link;
 
 	link.Insert(123);
@@ -17,6 +19,8 @@ int main() {
 	Node* p3 = link.Search(1232141);
 	link.Delete(321);
 	Node *p4 = link.Search(321);
+#endif
+#if 0
 	Hash table;
 	table.Insert(123);
 	table.Insert(1123);
@@ -34,7 +38,8 @@ int main() {
 	table.DeleteAllTable();
 
 	table.Delete(5412312);
-	*/
+#endif
+#if 1
 	quickSort SSrt;
 	int data[10] = { 123,34,12,54,1,3,66,122,156564,124 };
 	SSrt.sort(data, 10);
@@ -42,4 +47,27 @@ int main() {
 	{
 		cout << "idx :" << i << " data" << data[i] << endl;
 	}
+#endif
+#if 0
+	LinkedListWithString list;
+	char word[6][20] = { "parkjangseo",
+		"parkhyeyoun",
+		"good",
+		"imchristian",
+		"impossible",
+		"justdoit"
+	};
+	for (int idx = 0; idx < 6; idx++) {
+		list.Insert(word[idx], rand());
+	}
+	list.PrintAll();
+	for (int idx = 0; idx < 6; idx++) {
+		list.Search(word[idx]);
+	}
+	QSortWithLinkedList sorting;
+	sorting.sort(list);
+	list.PrintAll();
+
+#endif
+
 }

@@ -1,6 +1,5 @@
 #include "LinkedListWithString.h"
-
-
+#include "Util.h"
 StringNode::StringNode()
 :cnt(0),
 prev(nullptr),
@@ -12,40 +11,28 @@ StringNode::StringNode(char* _word, unsigned int cnt){
 	SetValue(_word, cnt);
 }
 
-unsigned int StringNode::GetStringLen(char* word) {
-	unsigned int len = 0;
-	while (word[len] != '\0')len++;
-	cout << "String Length : " << len << endl;
-	return len;
-}
-
-void StringNode::StringCpy(char* dst, char* src, unsigned int len) {
-	unsigned int idx = 0;
-	while (len != idx)dst[idx] = src[idx++];
-	return;
-}
-
 void StringNode::SetValue(char* _word, unsigned int _cnt) {
-	StringCpy(word, _word, GetStringLen(_word));
+	mStrCpy(word, _word, mStrLen(_word));
 	cnt = _cnt;
 	return;
 }
 
 
-LinkedListWIthString::LinkedListWIthString() {
+LinkedListWithString::LinkedListWithString() {
 	head = new StringNode();
 	tail = new StringNode();
 	head->SetNextP(tail);
 	head->SetPrevP(tail);
 	tail->SetNextP(head);
 	tail->SetPrevP(head);
-
 }
 
-LinkedListWIthString::~LinkedListWIthString() {
+LinkedListWithString::~LinkedListWithString() {
 	StringNode* p = head->GetNextP();
+	cout << "Destructor of LinkedListWithString" << endl;
 	while (p != tail){
 		StringNode* pp = p->GetNextP();
+		cout << "Delete This Node :" << p->GetStringP() << endl;
 		delete p;
 		p = pp;
 	}
@@ -53,3 +40,43 @@ LinkedListWIthString::~LinkedListWIthString() {
 	delete tail;
 }
 
+void LinkedListWithString::Insert(char* str, unsigned int _cnt) {
+	StringNode* newP = new StringNode(str, _cnt);
+	newP->SetPrevP(tail->GetPrevP());
+	newP->SetNextP(tail);
+	tail->GetPrevP()->SetNextP(newP);
+	tail->SetPrevP(newP);
+	cout << "Insert  :" << newP->GetStringP() <<"Cnt : "<<newP->GetCnt()<< endl;
+	return;
+}
+
+StringNode* LinkedListWithString::Search(char* str) {
+	StringNode* p = head->GetNextP();
+	while (p != tail) {
+		if (mStrCmp(p->GetStringP(), str) == true) {
+			cout << "find " << str << endl;
+			return p;
+		}
+		p = p->GetNextP();
+	}
+	return nullptr;
+}
+
+void LinkedListWithString::Delete(char* str) {
+	StringNode* p = nullptr;
+	if ((p = Search(str)) != nullptr) {
+		p->GetPrevP()->SetNextP(p->GetNextP());
+		p->GetNextP()->SetPrevP(p->GetPrevP());
+		delete p;
+		cout << "Delete finish" << endl;
+	}
+}
+
+void LinkedListWithString::PrintAll() {
+	StringNode* p = head->GetNextP();
+	while (p != tail) {
+		cout << "String : " << p->GetStringP() << endl;
+		p = p->GetNextP();
+	}
+	return;
+}

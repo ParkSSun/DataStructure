@@ -5,7 +5,7 @@ Node::Node()
 	next(nullptr) {}
 
 Node::~Node() {
-	cout << "Node Destructed" << endl;
+	//cout << "Node Destructed" << endl;
 }
 
 LinkedList::LinkedList()

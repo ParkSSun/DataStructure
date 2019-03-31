@@ -9,7 +9,7 @@ void quickSort::sort(int data[], int size) {
 }
 
 void quickSort::QSort(int data[], int startIdx, int endIdx) {
-	if (startIdx >= endIdx)return;
+	if (startIdx == endIdx)return;
 	int Lidx = startIdx;
 	int Tidx = startIdx;
 	int Pidx = endIdx;
@@ -26,7 +26,9 @@ void quickSort::QSort(int data[], int startIdx, int endIdx) {
 	int buf = data[Tidx];
 	data[Tidx] = data[Pidx];
 	data[Pidx] = buf;
+	if (startIdx == Tidx) return;
 	QSort(data, startIdx, Tidx - 1);
+	if (endIdx == Tidx)return;
 	QSort(data, Tidx + 1, endIdx);
 	return;
 
